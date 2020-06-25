@@ -1,13 +1,3 @@
-// TODO: block that says "Weather Dashboard"
-// TODO: container with 4 and 8 rows and col - give ids
-// TODO: search bar and search button
-// TODO: add created buttons (like movies)
-// TODO: also retreives local Data and fiveday forcast 
-// TODO: 
-// TODO: 
-// TODO: 
-// TODO: 
-
 
 // Oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
 var inputName = $("#inputName")
@@ -73,33 +63,3 @@ displayCityInfo();
 search.click(function(){
     displayCityInfo(inputName.val().trim())
 })
-
-
-// TODO: run ajax within display city function
-//     then make buttons
-//     make h3, append var 
-
-
-// var ApiKey = "b0e47115b1fe900748b142de13c8d5ac";
-// var q = "";
-
-
-// $.ajax({
-//     url: queryUrl,
-//     method: "GET"
-// }).then(function(response) {
-//     console.log(queryUrl)
-//     console.log(response)
-
-//     $("div.city").html("<h1>" + response.name + "</h1>")
-//     $("div.wind").text(`wind speed ${response.wind.speed} knots`)
-//     $("div.humidity").text(`humidity ${response.main.humidity}%`)
-    
-//     var tempF = ((response.main.temp - 275.15) * 1.80 + 32).toFixed(2);
-//     console.log(tempF);
-
-//     var tempDiv = $(".temp");
-//     tempDiv.text(tempF);
-//     $(".temp").append(tempDiv);
-// });
-
