@@ -1,9 +1,20 @@
+.jumbotron {
+    background-color: rgb(43, 43, 233);
+}
+
 h1 {
+    font-family: sans-serif;
     text-align: center;
-    color: white
+    color: white;
 }
 
 .card {
     margin: 0 auto;
-    padding: 30px 0px;
+    padding: 30px 30px;
+}
+
+.col-4 {
+    background-color: rgb(183, 201, 201);
+    margin: 0 auto;
+    padding: 30px 30px;
 }
