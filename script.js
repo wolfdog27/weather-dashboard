@@ -63,8 +63,11 @@ function displayCityInfo(city){
         var uvIndex = response.coord.lon + response.coord.lat;
         var pFour = ("<h3>").text("UV Index: " + uvIndex);
         weatherCard.append(pFour);
+        console.log(weatherCard)
     })
 }
+
+displayCityInfo();
 
 
 search.click(function(){
