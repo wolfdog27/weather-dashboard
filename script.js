@@ -17,11 +17,18 @@ if(fromlocalStorage !== null){
     }
 }
 search.click(function(){
+    myDiv.empty();
     var cityInput = inputName.val()
-    myArr.push(cityInput)
-     var myH1Tag = $("<button>")
-        myH1Tag.text(cityInput)  
+    displayCityInfo(cityInput)
+    fiveDay(cityInput)
+    if (!myArr.includes(cityInput)){
+        myArr.push(cityInput)
+    }
+    for(var i=0; i<myArr.length; i++){
+        var myH1Tag = $("<button>")
+        myH1Tag.text(myArr[i])
         myDiv.append(myH1Tag)
+    }
     localStorage.setItem("inputValue", JSON.stringify(myArr))
 })
 // Oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
@@ -47,19 +54,50 @@ function displayCityInfo(city){
         weatherCard.append(pTwo);
         // wind speed
         var windSpeed = response.wind.speed;
-        var pThree = ("<h3>").text("Wind Speed: " + windSpeed);
+        var pThree = $("<h3>").text("Wind Speed: " + windSpeed);
         weatherCard.append(pThree);
         // UV Index
         var uvIndex = response.coord.lon + response.coord.lat;
-        var pFour = ("<h3>").text("UV Index: " + uvIndex);
+        var pFour = $("<h3>").text("UV Index: " + uvIndex);
         weatherCard.append(pFour);
         console.log(weatherCard)
+
+        $(".currentWeather").append(weatherCard);
     })
 }
 
-displayCityInfo();
+function fiveDay(city){
+    var chosenCity = city;
+    var queryUrl = "https://api.openweathermap.org/data/2.5/forecast?q="+ chosenCity +"&appid=b0e47115b1fe900748b142de13c8d5ac&units=imperial";
+    
+
+    $.ajax({
+        url: queryUrl,
+        method: "GET"
+    }).then(function(response){
+        
+        var fiveDayRes= response.list
+
+        for(var i=0; i<fiveDayRes.length; i++){
+            
+            if(fiveDayRes[i].dt_txt.includes("12:00:00")){
+                console.log(fiveDayRes[i]);
+                var div = $("<div>")
+                div.attr("class","col-2")
+                var date= fiveDayRes[i].dt_txt.split(" ")
+                var datePtag=$("<p>")
+                datePtag.text(date[0])
+                var tempP = $("<p>")
+                tempP.text(fiveDayRes[i].main.temp)
+                var humP=$("<p>")
+                humP.text(fiveDayRes[i].main.humidity)
+                div.append(datePtag, tempP, humP)
+                $(".fiveDayDev").append(div)
+            }
+            
+        }
+       
+    })
+}
 
 
-search.click(function(){
-    displayCityInfo(inputName.val().trim())
-})
