@@ -44,21 +44,26 @@ function displayCityInfo(city){
         method: "GET"
     }).then(function(response){
         var weatherCard = $("<div class='card'>");
-        // temperature
+        // name and date
+        var name = response.name;
+        var time = moment().format("MMMM Do YYYY");
+        var pFive = $("<h3>").text(name + " " + time);
+        weatherCard.append(pFive);
+          // temperature
         var temperature = response.main.temp;
-        var pOne = $("<h3>").text("Temperature: " + temperature);
+        var pOne = $("<p>").text("Temperature: " + temperature);
         weatherCard.append(pOne);
         // humidity
         var humidity = response.main.humidity;
-        var pTwo = $("<h3>").text("Humidity: " + humidity);
+        var pTwo = $("<p>").text("Humidity: " + humidity);
         weatherCard.append(pTwo);
         // wind speed
         var windSpeed = response.wind.speed;
-        var pThree = $("<h3>").text("Wind Speed: " + windSpeed);
+        var pThree = $("<p>").text("Wind Speed: " + windSpeed);
         weatherCard.append(pThree);
-        // UV Index
+        // UV Index (SORRY THIS IS OFF!)
         var uvIndex = response.coord.lon + response.coord.lat;
-        var pFour = $("<h3>").text("UV Index: " + uvIndex);
+        var pFour = $("<p>").text("UV Index: " + uvIndex);
         weatherCard.append(pFour);
         console.log(weatherCard)
 
@@ -87,11 +92,14 @@ function fiveDay(city){
                 var date= fiveDayRes[i].dt_txt.split(" ")
                 var datePtag=$("<p>")
                 datePtag.text(date[0])
+                // sorry this doesn't work either...
+                var iconP = $("<img>")
+                iconP.text(fiveDayRes[i].weather[0].icon)
                 var tempP = $("<p>")
-                tempP.text(fiveDayRes[i].main.temp)
+                tempP.text("Temperature: " + fiveDayRes[i].main.temp + "F")
                 var humP=$("<p>")
-                humP.text(fiveDayRes[i].main.humidity)
-                div.append(datePtag, tempP, humP)
+                humP.text("Humidity" + fiveDayRes[i].main.humidity + "%")
+                div.append(datePtag, tempP, humP, iconP)
                 $(".fiveDayDev").append(div)
             }
             

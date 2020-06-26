@@ -22,3 +22,7 @@ h1 {
 .row2 {
     justify-content: flex;
 }
+
+.fiveDayDev {
+    background-color: rgb(137, 137, 238);
+}
